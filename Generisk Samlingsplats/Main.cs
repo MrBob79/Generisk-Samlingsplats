@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 
 class Program
@@ -32,13 +32,23 @@ class Program
         konto.CashOut(insert);
 
 
-        // Välja Aktie att månadsspara i
-        Console.WriteLine("Ange i vilken Aktie du vill spara: ");
-        string Stocks = Console.ReadLine();
-        konto.StockSaves(Stocks);
+        // Lägg till aktieposter
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine($"Ange information för aktie {i + 1}:");
+            Console.Write("Namn: ");
+            string StockName = Console.ReadLine();
+            Console.Write("Värde vid köp: ");
+            int ValueatBuy = int.Parse(Console.ReadLine());
+            Console.Write("Antal aktier: ");
+            int AmountStock = int.Parse(Console.ReadLine());
+
+            StockPost stockPosts = new Aktiepost(StockName, ValueatBuy, AmountStock);
+            konto.AddToStockPost(stockPosts);
+        }
 
         konto.PrintInfo();
-
+        konto.AddToStockPost();
     }
 }
 
