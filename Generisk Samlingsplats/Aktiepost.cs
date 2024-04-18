@@ -1,4 +1,32 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+
+    // Klassen för Aktiepost
+public class StockPost
+{
+    private string StockName;
+    private int ValueOnBuy;
+    private int Value;
+    private int DateForBuy;
+    private int AmountStock;
+
+    // Konstruktor för Aktiepost
+
+    public StockPost(string stockname, int valueonbuy, int amountastock)
+    {
+        StockName = stockname;
+        ValueOnBuy = valueonbuy;
+        AmountStock = amountastock;
+        Value = 0;
+        DateForBuy = 0;
+
+    }
+    public override string ToString()
+    {
+        return $"Aktie: {StockName}, Värde vid köp: {ValueOnBuy}, Aktuellt värde: {Value}, Antal aktier: {AmountStock}";
+    }
+}
+
 
 public class Bankkonto
 {
@@ -6,16 +34,16 @@ public class Bankkonto
     private string Owner;
     private double Saldo;
     private int AccountNumber;
-    private string Stock;
+    private List<StockPost> Stockposts; 
     private double Savings;
 
     // Konstruktor
-    public Bankkonto(string owner, double saldo, int accountNumber, double Saves)
+    public Bankkonto(string owner, double saldo, int accountNumber, double Saves )
     {
         this.Owner = owner;
         this.Saldo = saldo;
         this.AccountNumber = accountNumber;
-        this.Stock = " ";
+        this.Stockposts = new List<StockPost>();
         this.Savings = Saves;
         Console.WriteLine("-----------------------------\n");
     }
@@ -52,11 +80,14 @@ public class Bankkonto
         Console.WriteLine("-----------------------------\n");
 
     }
-    public void StockSaves(string stock)
+    public void AddToStockPost(StockPost stockPosts)
     {
-        this.Stock = stock;
-        Console.WriteLine($"Vald Aktie: {stock}");
+        StockPost.Add(stockPosts);
         Console.WriteLine("-----------------------------\n");
+    }
+    public void PrintStockPosts()
+    {
+        Console.WriteLine($"\nAktiePoster för {Owner}");
     }
 
     // Metod för att skriva ut Bankinfo
@@ -68,5 +99,13 @@ public class Bankkonto
         Console.WriteLine($"Månadssparande: {this.Savings}");
         Console.WriteLine($"Aktie: {this.Stock}");
 
+    }
+    public void PrintStockInfo()
+    {
+        Console.WriteLine($"StockPost för {Owner}:");
+        foreach (var stockPosts in StockPost)
+        {
+            Console.WriteLine(stockPosts.ToString());
+        }
     }
 }
